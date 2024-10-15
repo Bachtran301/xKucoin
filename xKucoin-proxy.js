@@ -4,7 +4,7 @@ const axios = require('axios');
 const colors = require('colors');
 const FormData = require('form-data');
 const { HttpsProxyAgent } = require('https-proxy-agent');
-const { Worker, isMainThread, workerData, parentPort } = require('worker_threads');
+const { Worker, isMainThread, workerData } = require('worker_threads');
 const printLogo = require('./src/logo');
 
 class KucoinAPIClient {
@@ -216,7 +216,7 @@ async function main() {
 }
 
 if (isMainThread) {
-    main().catch(err => console.error(err));
+    main().catch(console.error);
 } else {
     workerFunction(workerData);
 }
